@@ -43,5 +43,5 @@ Make sure the RDE.csv file is located in your current working directory (check w
 Requirements
 -------------
 Install packages
-install.packages("readr")
-install.packages("dplyr")
+1. install.packages("readr")
+2. install.packages("dplyr")
