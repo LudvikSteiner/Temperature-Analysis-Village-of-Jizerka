@@ -42,9 +42,6 @@ Make sure the RDE.csv file is located in your current working directory (check w
 
 Requirements
 -------------
-# Install packages
+Install packages
 install.packages("readr")
 install.packages("dplyr")
-
-# Run the script
-source("temperature_analysis.R")
