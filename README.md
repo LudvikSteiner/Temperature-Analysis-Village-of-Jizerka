@@ -1,4 +1,4 @@
-This is a R script that performs a basic statistical analysis of temperature data collected in the village of Jizerka. The data include daily maximum, minimum, and average temperatures recorded over a given period.
+This is a R script performs a basic statistical analysis of temperature data collected in the village of Jizerka. The data include daily maximum, minimum, and average temperatures recorded over a given period.
 
 Input Data
 ----------
