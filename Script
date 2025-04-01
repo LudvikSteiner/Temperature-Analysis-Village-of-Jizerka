@@ -1,0 +1,62 @@
+# Temperature in the village of Jizerka
+
+# Load required libraries
+library(readr)
+library(dplyr)
+
+# Load data from file (skip the first header row)
+RDE <- read_csv("RDE.csv", skip = 1, col_names = FALSE)
+
+# Set column names (only 3 columns in the input CSV)
+colnames(RDE) <- c("Date", "Max_temperature", "Min_temperature")
+
+# Convert numeric text (with commas) to numeric values
+# and compute average temperature
+RDE1 <- RDE %>%
+  mutate(
+    Max_temperature = as.numeric(gsub(",", ".", Max_temperature)),
+    Min_temperature = as.numeric(gsub(",", ".", Min_temperature)),
+    Average = (Max_temperature + Min_temperature) / 2
+  ) %>%
+  filter(
+    !is.na(Max_temperature),
+    !is.na(Min_temperature),
+    !is.na(Average)
+  )
+
+# Calculate summary statistics
+summary_stats <- RDE1 %>%
+  summarise(
+    # Max temperature
+    mean_max = mean(Max_temperature),
+    median_max = median(Max_temperature),
+    trimmed_mean_max = mean(Max_temperature, trim = 0.1),
+    min_max = min(Max_temperature),
+    max_max = max(Max_temperature),
+    sd_max = sd(Max_temperature),
+    IQR_max = IQR(Max_temperature),
+    
+    # Min temperature
+    mean_min = mean(Min_temperature),
+    median_min = median(Min_temperature),
+    trimmed_mean_min = mean(Min_temperature, trim = 0.1),
+    min_min = min(Min_temperature),
+    max_min = max(Min_temperature),
+    sd_min = sd(Min_temperature),
+    IQR_min = IQR(Min_temperature),
+    
+    # Average temperature (calculated)
+    mean_avg = mean(Average),
+    median_avg = median(Average),
+    trimmed_mean_avg = mean(Average, trim = 0.1),
+    min_avg = min(Average),
+    max_avg = max(Average),
+    sd_avg = sd(Average),
+    IQR_avg = IQR(Average)
+  )
+
+# Print results to console
+print(summary_stats)
+
+# Export results to CSV file
+write.csv(summary_stats, "temperature_statistics.csv", row.names = FALSE)
